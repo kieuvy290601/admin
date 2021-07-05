@@ -18,15 +18,15 @@ include("../db.php");
 include "sidenav.php";
 include "topheader.php";
 
-if(isset($_POST['btn_save']))
+if($_GET['btn_save'])
 {
-$first_name=$_POST['first_name'];
-$last_name=$_POST['last_name'];
-$email=$_POST['email'];
-$user_password=$_POST['password'];
-$mobile=$_POST['phone'];
-$address1=$_POST['city'];
-$address2=$_POST['country'];
+$first_name=$_GET['first_name'];
+$last_name=$_GET['last_name'];
+$email=$_GET['email'];
+$user_password=$_GET['password'];
+$mobile=$_GET['phone'];
+$address1=$_GET['city'];
+$address2=$_GET['country'];
 $query = "INSERT INTO user_info VALUES ('$user_id', '$first_name', '$last_name', '$email', '$password', '$mobile', '$address1', '$address2')";
 $data = pg_query($pg_heroku,$query);
 if($data)
@@ -53,8 +53,10 @@ echo "Failed to update the table.";
                   <p class="card-category">Complete User profile</p>
                 </div>
                 <div class="card-body">
-                  <form action="" method="POST">
+                  <form action="" method="GET">
                     <div class="row">
+                      
+
                       
                       <div class="col-md-3">
                         <div class="form-group bmd-form-group">

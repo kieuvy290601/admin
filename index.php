@@ -42,15 +42,16 @@ include "topheader.php";
                       {
                       die('Error: Could not connect: ' . pg_last_error());
                       }
-                        $result="select * from user_info";
+                        $result='select * from user_info';
                         $data = pg_query($pg_heroku, $query);
                         $total = pg_num_rows($data);
-
-                        while($result=pg_fetch_assoc($data))
+                        if($total!=0){
+                          while($result=pg_fetch_assoc($data))
                         {	
                         echo "<tr><td>$user_id</td><td>$first_name</td><td>$last_name</td><td>$email</td><td>$password</td><td>$phone</td><td>$address1</td><td>$address2</td>
 
                         </tr>";
+                        }
                         }
                         ?>
                     </tbody>
@@ -58,7 +59,13 @@ include "topheader.php";
                 <div class="ps__rail-x" style="left: 0px; bottom: 0px;"><div class="ps__thumb-x" tabindex="0" style="left: 0px; width: 0px;"></div></div><div class="ps__rail-y" style="top: 0px; right: 0px;"><div class="ps__thumb-y" tabindex="0" style="top: 0px; height: 0px;"></div></div></div>
               </div>
             </div>
+
+
+
+
+
           </div>
+        
            <div class="row">
             <div class="col-md-6">
             <div class="card ">
