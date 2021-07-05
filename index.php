@@ -31,9 +31,22 @@ include "topheader.php";
                     </tr></thead>
                     <tbody>
                       <?php 
-                        $result=mysqli_query($con,"select * from user_info")or die ("query 1 incorrect.....");
+                      $host_heroku = "ec2-52-86-25-51.compute-1.amazonaws.com";
+                      $db_heroku = "dcnnn5f87r5pst";
+                      $user_heroku = "nlcmibxyahfytv";
+                      $pw_heroku =
+                      "df1ff1c44e44f986fd52f17f3da8346a956efc0d65553c3b187d88514683d65e";
+                      $conn_string = "host=$host_heroku port=5432 dbname=$db_heroku user=$user_heroku password=$pw_heroku";
+                      $pg_heroku = pg_connect($conn_string);
+                      if (!$pg_heroku)
+                      {
+                      die('Error: Could not connect: ' . pg_last_error());
+                      }
+                        $result="select * from user_info";
+                        $data = pg_query($pg_heroku, $query);
+                        $total = pg_num_rows($data);
 
-                        while(list($user_id,$first_name,$last_name,$email,$password,$phone,$address1,$address2)=mysqli_fetch_array($result))
+                        while($result=pg_fetch_assoc($data))
                         {	
                         echo "<tr><td>$user_id</td><td>$first_name</td><td>$last_name</td><td>$email</td><td>$password</td><td>$phone</td><td>$address1</td><td>$address2</td>
 

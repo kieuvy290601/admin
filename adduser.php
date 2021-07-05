@@ -1,9 +1,17 @@
-
- <?php
-session_start();
-include("../db.php");
-include "sidenav.php";
-include "topheader.php";
+<?php
+$host_heroku = "ec2-52-86-25-51.compute-1.amazonaws.com";
+$db_heroku = "dcnnn5f87r5pst";
+$user_heroku = "nlcmibxyahfytv";
+$pw_heroku =
+"df1ff1c44e44f986fd52f17f3da8346a956efc0d65553c3b187d88514683d65e";
+$conn_string = "host=$host_heroku port=5432 dbname=$db_heroku user=$user_heroku password=$pw_heroku";
+$pg_heroku = pg_connect($conn_string);
+if (!$pg_heroku)
+{
+die('Error: Could not connect: ' . pg_last_error());
+}
+?>
+<?php
 if(isset($_POST['btn_save']))
 {
 $first_name=$_POST['first_name'];
@@ -13,14 +21,20 @@ $user_password=$_POST['password'];
 $mobile=$_POST['phone'];
 $address1=$_POST['city'];
 $address2=$_POST['country'];
-
-mysqli_query($con,"insert into user_info(first_name, last_name,email,password,mobile,address1,address2) values ('$first_name','$last_name','$email','$user_password','$mobile','$address1','$address2')") 
-			or die ("Query 1 is inncorrect........");
-header("location: manage_users.php"); 
-mysqli_close($con);
+$query = "INSERT INTO user_info VALUES ('$user_id', '$first_name', '$last_name', '$email', '$password', '$mobile', '$address1', '$address2')";
+$data = pg_query($pg_heroku,$query);
+if($data)
+{
+echo "<script>alert('Added Successfully!')</script>";
+?>
+<meta http-equiv="refresh" content="0; url=https://toyatn-shop.herokuapp.com/index.php" />;
+<?php
 }
-
-
+else
+{
+echo "Failed to update the table.";
+}
+}
 ?>
       <!-- End Navbar -->
       <div class="content">

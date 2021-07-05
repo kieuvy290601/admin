@@ -1,4 +1,16 @@
-
+<?php
+$host_heroku = "ec2-52-86-25-51.compute-1.amazonaws.com";
+$db_heroku = "dcnnn5f87r5pst";
+$user_heroku = "nlcmibxyahfytv";
+$pw_heroku =
+"df1ff1c44e44f986fd52f17f3da8346a956efc0d65553c3b187d88514683d65e";
+$conn_string = "host=$host_heroku port=5432 dbname=$db_heroku user=$user_heroku password=$pw_heroku";
+$pg_heroku = pg_connect($conn_string);
+if (!$pg_heroku)
+{
+die('Error: Could not connect: ' . pg_last_error());
+}
+?>
     <?php
 session_start();
 include("../db.php");
