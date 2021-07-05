@@ -33,7 +33,6 @@ if($data)
 {
 echo "<script>alert('Added Successfully!')</script>";
 ?>
-<meta http-equiv="refresh" content="0; url=https://toyatn-shop.herokuapp.com/index.php" />;
 <?php
 }
 else
@@ -57,7 +56,7 @@ echo "Failed to update the table.";
                     <div class="row">
                       
 
-                      
+
                       <div class="col-md-3">
                         <div class="form-group bmd-form-group">
                           <label class="bmd-label-floating">First Name</label>
